@@ -237,4 +237,5 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
 #payment .payment_methods input[type="text"] {
     float: right;
 }
+.wc_payment_method label{cursor: pointer;}
 </style>
