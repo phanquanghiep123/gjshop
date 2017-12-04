@@ -1,0 +1,15 @@
+route, controller copy ( and change)
+'shop.layouts.master' -> config('shop.backend_layout')
+
+route('shop.  -> route('gjadmin.shop. ( controller also)
+
+@include('shop. -> @include('shop::backend.  
+
+view('shop.  -> view('shop::backend. (controller)
+
+route' => ['shop.   ->   route' => ['gjadmin.shop.
+
+rename model
+
+fix form request
+

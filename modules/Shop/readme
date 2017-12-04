@@ -1,0 +1,11 @@
+Package require :
+ -  "laravelcollective/html": "5.*",
+ -  "devfactory/imagecache": "^3.0"
+ ignited/laravel-omnipay": "2.*",
+        "omnipay/omnipay": "*",
+
+JS 
+
+https://github.com/needim/noty
+http://daneden.me/animate
+https://jqueryvalidation.org/

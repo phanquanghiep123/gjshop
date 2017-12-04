@@ -1,0 +1,306 @@
+
+/**************************
+  * HELPERS
+  **************************/
+
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-margin-top {
+    margin-top: 0px;
+}
+
+.small-margin-top {
+    margin-top: 5px;
+}
+
+
+.padding-small {
+    padding:5px !important;
+}
+.padding-medium {
+    padding:10px !important;
+}
+.padding-large {
+    padding:20px !important;
+}
+.padding-xlarge {
+    padding:30px !important;
+}
+
+.padding-top-small {
+    padding-top:5px !important;
+}
+.padding-top-medium {
+    padding-top:10px !important;
+}
+.padding-top-large {
+    padding-top:20px !important;
+}
+.padding-top-large {
+    padding-top:20px !important;
+}
+.padding-top-xlarge {
+    padding-top:30px !important;
+}
+
+.padding-bottom-small {
+    padding-bottom:5px !important;
+}
+.padding-bottom-medium {
+    padding-bottom:10px !important;
+}
+.padding-bottom-large {
+    padding-bottom:20px !important;
+}
+.padding-bottom-xlarge {
+    padding-bottom:30px !important;
+}
+
+.padding-left-small {
+    padding-left:5px !important;
+}
+.padding-left-medium {
+    padding-left:10px !important;
+}
+.padding-left-large {
+    padding-left:20px !important;
+}
+.padding-left-xlarge {
+    padding-left:30px !important;
+}
+
+.padding-right-small {
+    padding-right:5px !important;
+}
+.padding-right-medium {
+    padding-right:10px !important;
+}
+.padding-right-large {
+    padding-right:20px !important;
+}
+.padding-right-xlarge {
+    padding-right:30px !important;
+}
+
+
+.margin-small {
+    margin:5px !important
+}
+.margin-medium {
+    margin:10px !important;
+}
+.margin-large {
+    margin:20px !important;
+}
+.margin-xlarge {
+    margin:30px !important;
+}
+
+.small-margin-top {
+    margin-top:5px !important;
+}
+.medium-margin-top {
+    margin-top:10px !important;
+}
+.large-margin-top {
+    margin-top:20px !important;
+}
+.large-margin-top {
+    margin-top:20px !important;
+}
+.xlarge-margin-top {
+    margin-top:30px !important;
+}
+
+.small-margin-bottom {
+    margin-bottom:5px !important;
+}
+.medium-margin-bottom {
+    margin-bottom:10px !important;
+}
+.large-margin-bottom {
+    margin-bottom:20px !important;
+}
+.xlarge-margin-bottom {
+    margin-bottom:30px !important;
+}
+
+.small-margin-left {
+    margin-left:5px !important;
+}
+.medium-margin-left {
+    margin-left:10px !important
+}
+.large-margin-left {
+    margin-left:20px !important;
+}
+.xlarge-margin-left {
+    margin-left:30px !important;
+}
+
+.small-margin-right {
+    margin-right:5px !important;
+}
+.medium-margin-right {
+    margin-right:10px !important;
+}
+.large-margin-right {
+    margin-right:20px !important;
+}
+.xlarge-margin-right {
+    margin-right:30px !important;
+}
+
+
+.align-center {
+    text-align: center !important;
+}
+
+img.avatar {
+    border-radius: 50%;
+    border: 3px solid #E2E2E2;
+}
+
+.icon-12 {
+    font-size: 12px !important;
+}
+.icon-25 {
+    font-size: 25px !important;
+}
+.icon-50 {
+    font-size: 54px !important;
+}
+.icon-80 {
+    font-size: 80px !important;
+}
+.icon-120 {
+    font-size: 120px !important;
+}
+
+/***
+ *
+ * Users profile page
+ *
+ **************************/ 
+
+select#roleSelect {
+    height: 200px;
+}
+
+select#catSelect {
+    height: 300px;
+}
+
+div.reviewBio .cke{
+    border: 4px solid #BA1414 !important ;
+}
+
+
+.actionButton {
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    padding: 5px  0 5px 15px;
+}
+.actionButton:hover {
+    background: #f5f5f5;
+}
+.note-editor .note-toolbar {
+    padding: 0 10px 9px !important
+}
+.note-editor .modal.in .modal-dialog {
+    z-index: 2000;
+}
+.note-editor .note-toolbar {
+    padding: 0 10px 9px !important;
+    overflow: visible;  // Please add this line
+}
+.note-editor .modal.in .modal-dialog .modal-body {
+    position: relative;
+    z-index: 9000;
+    max-height: 400px;
+    overflow-y: auto
+}
+.tab-block .nav-tabs > li.active > a {
+    z-index: 10;
+}
+
+/***
+ *
+ * Products Page
+ *
+ **************************/ 
+
+.review {
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 20px 20px 15px;
+}
+
+/***
+ *
+ * general Pages
+ *
+ **************************/ 
+
+ul.revisionComments {
+    padding-left: 0px;
+    list-style: none;
+}
+
+ul.revisionComments li {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* ========  MENU ======== */
+
+.sortable {
+    min-height: 50px;
+    border:1px dotted #dab10d;
+    padding-left: 0px;
+}
+
+.sortable li {
+    background: #f6f6f6 none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: #1c94c4;
+    list-style: outside none none;
+    margin: 5px;
+    padding: 5px;
+}
+
+li.sortable-placeholder {
+    border: 1px dashed #CCC;
+    background: none;
+    height: 40px
+}
+
+input.error {
+    border-color:#E7505A
+}
+
+
+.admin-form .checkbox {
+    cursor: pointer;
+    position: relative;
+    margin-right: 5px;
+    background: #fff;
+    display: inherit;
+    border: none;
+    height: auto;
+    width: auto;
+}
+
+@media print {    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

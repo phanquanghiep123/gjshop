@@ -1,0 +1,59 @@
+@extends('layouts.backend')
+
+
+
+@section('breadcrumb')
+<ol class="breadcrumb">
+    <li class="crumb-active">
+      <a href="{!! route('dashboard') !!}">Dashboard</a>
+    </li>
+    <li class="crumb-icon">
+        <span class="glyphicon glyphicon-home"></span>
+    </li>
+    <li class="crumb-trail">Faq Categories</li>
+    <li class="crumb-trail">Edit Faq Category: {!! $category->name !!}</li>
+</ol>
+@stop
+
+
+@section('breadcrumb_right')
+<div class="topbar-right hidden-xs hidden-sm">
+    <a href="{!! route('gjadmin.faq-categories.index') !!}" class="btn btn-default btn-sm light fw600 ml10">
+    <span class="fa fa-users pr5"></span> All Faq Categories</a>
+
+    <a href="#" data-toggle="modal" data-target="#addPermissioCat" class="btn btn-default btn-sm light fw600 ml10">
+    <span class="fa fa-plus pr5"></span> Add Faq Category</a>
+</div>
+@stop
+
+
+
+@section('content')
+  @include('backend.faq-categories.form', ['model' => $category])
+
+<div class="modal fade" id="addPermissioCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Faq Category</h4>
+      </div>
+      <div class="modal-body">
+            
+        {!! Former::open_vertical(route('gjadmin.faq-categories.store'),'POST') !!}
+        {!! Former::token() !!}
+         {!! Former::text('name')->class('form-control')->forceValue('') !!}
+
+        {!! Former::text('position')->class('form-control')->forceValue('') !!} 
+                
+        {!! Former::select('status')->options(array('1' => 'Active','2' => 'Inactive'))->class('form-control')->required() !!}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-dark btn btn-outline" data-dismiss="modal">Close</button>        
+        {!! Former::submit('Save')->class('btn btn-system') !!} 
+      </div>
+    </div>
+  </div>
+</div>
+@stop

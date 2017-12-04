@@ -1,0 +1,31 @@
+#!/bin/bash
+printf "Come on ..\n"
+
+WORKING_DIR='public_html/nurturedforliving.com'
+BRANCH='master'
+SERVER_ADDRESS='192.185.46.60'
+USERNAME='abulayla'
+SERVER_DOMAIN_URL='http://nurturedforliving.com'
+printf "\n Connect to server, use password 4mb13ntgr0up\n"
+ssh -p 2222 $USERNAME@$SERVER_ADDRESS << EOF
+  source ~/.bashrc
+  cd $WORKING_DIR
+  printf "\n[Updating source code ... ]\n\n"
+  if git pull origin $BRANCH
+  then
+    printf "\n[Composer install ... ]\n\n"
+    /opt/php56/bin/php composer.phar update
+    
+     printf "\n[Compile less ... ]\n\n"
+    /opt/php56/bin/php artisan assets:less
+
+    printf "\n[Clear caches ... ]\n\n"
+    /opt/php56/bin/php artisan cache:clear
+    /opt/php56/bin/php artisan clear-compiled
+    /opt/php56/bin/php artisan optimize
+    printf "\nChecking response status: "
+    curl -sI $SERVER_DOMAIN_URL | head -n 1
+
+    printf "\nYeah! Finished deployment\n"
+  fi
+EOF
