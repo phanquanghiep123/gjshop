@@ -133,7 +133,6 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
                         <table class="table no-margin-bottom">
                             @if($loggedUser && $loggedUser->points >= $minimum_redeemable_points->value)
                             <tr>
-                                
                                 <td colspan="2">
                                     <input type="hidden" id="point_per_price" value="{{ $minimum_redeemable_points->value }}" /> 
                                     <input type="hidden" id="value-use-redeem" name="use-redeem" value="@if($GetRedeem['use'] == 1){{"0"}}@else{{ "1" }}@endif">
@@ -160,17 +159,17 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
                                         Continue Shopping
                                     </a>
                                     <hr class="dashed medium-margin-top medium-margin-bottom"/>
-                                    <div id="payment" class="woocommerce-checkout-payment">
-                                       <ul class="wc_payment_methods payment_methods methods">
-                                          <li class="wc_payment_method payment_method_paypal">
+                                    <div id="payment">
+                                       <ul class="payment_methods">
+                                          <li class="payment_method_paypal">
                                              <input checked id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
                                              <label for="payment_method_paypal">
                                              PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png" alt="PayPal acceptance mark"><a href="https://www.paypal.com/gb/webapps/mpp/paypal-popup" class="about_paypal" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">What is PayPal?</a>  </label>
-                                             <div class="payment_box payment_method_paypal">
+                                             <div class="payment_box show payment_method_paypal">
                                                 <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
                                              </div>
                                           </li>
-                                          <li class="wc_payment_method payment_method_stripe">
+                                          <li class="payment_method_stripe">
                                              <input id="payment_method_stripe" type="radio" class="input-radio" name="payment_method" value="stripe" data-order_button_text="">
                                              <label for="payment_method_stripe">
                                              Credit Card (Stripe) <img src="http://onepage-demo.optart.biz/wp-content/plugins/woocommerce/assets/images/icons/credit-cards/visa.svg" alt="Visa" width="32" style="margin-left: 0.3em"><img src="http://onepage-demo.optart.biz/wp-content/plugins/woocommerce/assets/images/icons/credit-cards/mastercard.svg" alt="Mastercard" width="32" style="margin-left: 0.3em"><img src="http://onepage-demo.optart.biz/wp-content/plugins/woocommerce/assets/images/icons/credit-cards/amex.svg" alt="Amex" width="32" style="margin-left: 0.3em">  </label>
@@ -180,19 +179,19 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
                                                    <fieldset id="wc-stripe-cc-form" class="wc-credit-card-form wc-payment-form">
                                                       <p class="form-row form-row-wide">
                                                          <label for="stripe-card-number">Card number <span class="required">*</span></label>
-                                                         <input id="stripe-card-number" type="text" name="stripe[number_car]" placeholder="•••• •••• •••• ••••">
+                                                         <input class="stripe-info" data-title="Card number" id="stripe-card-number" type="text" name="stripe[number_car]" placeholder="•••• •••• •••• ••••">
                                                       </p>
                                                       <p class="form-row form-row-first">
                                                          <label for="stripe-card-expiry">Moth (MM) <span class="required">*</span></label>
-                                                         <input id="stripe-card-expiry" name="stripe[moth]" type="text" placeholder="YY">
+                                                         <input class="stripe-info" data-title="Card moth" id="stripe-card-expiry" name="stripe[moth]" type="text" placeholder="MM">
                                                       </p>
                                                       <p class="form-row form-row-first">
                                                          <label for="stripe-card-expiry">Year (YY) <span class="required">*</span></label>
-                                                         <input id="stripe-card-expiry" name="stripe[year]" type="text" placeholder="YY">
+                                                         <input class="stripe-info" data-title="Card year" id="stripe-card-expiry" name="stripe[year]" type="text" placeholder="YY">
                                                       </p>
                                                       <p class="form-row form-row-last">
                                                          <label for="stripe-card-cvc">Card code <span class="required">*</span></label>
-                                                         <input id="stripe-card-cvc" name="stripe[cvc]" type="text" placeholder="CVC">
+                                                         <input class="stripe-info" data-title="Card VCV" id="stripe-card-cvc" name="stripe[cvc]" type="text" placeholder="CVC">
                                                       </p>
                                                       <div class="clear"></div>
                                                    </fieldset>
@@ -223,6 +222,8 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
     </div>
 </div>
 <style type="text/css">
+.payment_box{display: none;}
+.payment_box.show{display: block;}
 #payment .payment_methods li img {
     float: right;
     border: 0;
@@ -237,5 +238,8 @@ $minimum_redeemable_points = \Modules\Shop\Models\Setting::where('key','loyalty_
 #payment .payment_methods input[type="text"] {
     float: right;
 }
-.wc_payment_method label{cursor: pointer;}
+#order-create-form .btn-success{
+    margin-top: 30px;
+}
+label{cursor: pointer;}
 </style>

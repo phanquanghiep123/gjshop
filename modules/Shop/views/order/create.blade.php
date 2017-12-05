@@ -76,7 +76,16 @@ $ukFreeShipping = Modules\Shop\Models\Setting::where('key', 'uk_free_shipping')-
         <input type="hidden" name="shipping_method" value="0" />
     </script>
     <script type="text/javascript">
+        $(document).on("change","#payment .payment_methods .input-radio",function(){
+            $(".payment_methods .payment_box.show").removeClass("show");
+            if($(this).is(':checked') == true){
+                $(this).closest("li").find(".payment_box").addClass("show");
+            }
+        });
         $(document).ready(function () {
+            <?php if(\Session::get('error') != null){?>
+                NotificationDisplay.showErrorMessage("<?php echo \Session::get('error')?>");
+            <?php }?>
             $('#zip_code').val('');
             $('#order-create-form [name="region"]').val('');
             $('#order-create-form [name="country"] option').remove();
@@ -157,7 +166,20 @@ $ukFreeShipping = Modules\Shop\Models\Setting::where('key', 'uk_free_shipping')-
                 if (!$('#order-create-form').valid()) {
                     return false;
                 }
-            }        
+            }  
+            if($(".payment_methods .input-radio[name = payment_method]:checked").val() == "stripe"){
+                var check = 0;
+                $.each($("#wc-stripe-cc-form .stripe-info"),function(){
+                    if($(this).val == null || $(this).val().trim() == ""){
+                        check++;
+                        NotificationDisplay.showErrorMessage("Please enter "+$(this).attr("data-title"));
+                    }
+                })
+                if(check > 0){
+                    return false;
+                }
+                
+            }      
             $('#order-create-form [type="submit"]').addClass('btn-loading');
             var courseOnly = parseInt($('#shop-cart-popup-content').data('courses-only'));
             if (!courseOnly) {
@@ -219,8 +241,6 @@ $ukFreeShipping = Modules\Shop\Models\Setting::where('key', 'uk_free_shipping')-
         $('#zip_code').on('keyup', function (e) {
             this.value = this.value.toUpperCase();
         });
-        
-        
         
            var shippingAressVue =  new Vue({
             el : '#order-form-shipping-address',
@@ -624,4 +644,5 @@ $ukFreeShipping = Modules\Shop\Models\Setting::where('key', 'uk_free_shipping')-
             return false;
         }
     </script>
+
 @stop

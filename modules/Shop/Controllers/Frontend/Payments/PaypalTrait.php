@@ -49,16 +49,37 @@ trait PaypalTrait
         Session::save();
         Stripe::setApiKey('rk_test_d2vAxjIiQcR9pqTDxYx6lmDA');
         $myCard = array('number' => $stripe["number_car"], 'exp_month' => $stripe["moth"], 'exp_year' => $stripe["year"], "cvc_year" => $stripe["cvc"]);
-        $charge = Charge::create(array('card' => $myCard, 'amount' => $total, 'currency' => 'EUR'));
-        $orderSaved->meta = json_encode($charge);
-        $orderSaved->status = Order::PAYMENT_MADE_STATUS;
-        $orderSaved->save();
-        if($charge->status === 'succeeded') {
-            return redirect()->route('shop.checkout.stripe_return',["order" => $request->order,"token" => $charge->id]);
-        }else{
-            return redirect()->route('shop.checkout.stripe_return',["order" => $request->order,"token" => $charge->id]);
+        try {
+            $charge = Charge::create(array('card' => $myCard, 'amount' => $total, 'currency' => 'EUR'));
+            $orderSaved->meta = json_encode($charge);
+            $orderSaved->status = Order::PAYMENT_MADE_STATUS;
+            $orderSaved->save();
+            if($charge->status === 'succeeded') {
+                return redirect()->route('shop.checkout.stripe_return',["order" => $request->order,"token" => $charge->id]);
+            }else{
+                return redirect()->route('shop.checkout.stripe_return',["order" => $request->order,"token" => $charge->id]);
+            }
+        } catch(\Stripe\Error\Card $e) {
+          // Since it's a decline, \Stripe\Error\Card will be caught
+          $body = $e->getJsonBody();
+          $err  = $body['error'];
+          $request->session()->flash('error', "Card Error: ".$err['message']);
+          return redirect()->route('shop.order.create')->withInput();
+        } catch (\Stripe\Error\RateLimit $e) {
+          // Too many requests made to the API too quickly
+        } catch (\Stripe\Error\InvalidRequest $e) {
+          // Invalid parameters were supplied to Stripe's API
+        } catch (\Stripe\Error\Authentication $e) {
+          // Authentication with Stripe's API failed
+          // (maybe you changed API keys recently)
+        } catch (\Stripe\Error\ApiConnection $e) {
+          // Network communication with Stripe failed
+        } catch (\Stripe\Error\Base $e) {
+          // Display a very generic error to the user, and maybe send
+          // yourself an email
+        } catch (Exception $e) {
+          // Something else happened, completely unrelated to Stripe
         }
-        
     }
     public function getStripeCheckoutReturn(Request $request, $order)
     {
